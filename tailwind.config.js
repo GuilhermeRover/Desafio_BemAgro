@@ -19,10 +19,18 @@ module.exports = {
       
       '2xl' : '1536px',
     },
-    extend: {},
+    extend: {
+      transformOrigin: {
+        "0": "0%",
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      scale: ['group-hover'],
+      animation: ['hover', 'focus'],
+      filter: ['hover', 'focus'],
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

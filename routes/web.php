@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource(
+    'config', UserController::class
+);
+
+Route::resource(
+    'dashboard', UserGithubController::class
+);
+
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::get('/cadastre-se', 'Auth\RegisterController@index')->name('register');
+Route::get('/logout', Auth\LogoutController::class)->name('logout');
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
