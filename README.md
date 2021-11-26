@@ -19,7 +19,7 @@ Desafio elaborado pela empresa BemAgro para vaga de Desenvolvedor PHP.
 - Envio do Desafio pela BemAgro: 22/11/2021 às 5:48 PM;
 - Prazo final para entrega: 26/11/2021 às 09:00 AM;
 - Início em: 22/11/2021 às 10:30 PM;
-- Entrega em:
+- Entrega em: 26/11/2021 às 08:15 AM;
 ## Setup instalado:
 
 - **[Laravel 7.x](https://laravel.com/)**;
@@ -27,6 +27,8 @@ Desafio elaborado pela empresa BemAgro para vaga de Desenvolvedor PHP.
 - **[Alpine.js](https://alpinejs.dev/)**, biblioteca javascript base.
 - **[Boxicons](https://boxicons.com/)**, biblioteca de ícones diversos.
 
+## Live test
+Está disponível no link **[Desafio BemAgro](https://bemagro.guilhermerover.com.br)**
 ## Instalação
 
 Para começar a instalação, precisamos clonar o projeto:
