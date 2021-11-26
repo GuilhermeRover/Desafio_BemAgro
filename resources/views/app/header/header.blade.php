@@ -17,14 +17,17 @@
     <div class="w-full h-full flex items-center justify-center">
         <div>
         @auth
-            <a href="{{ route('dashboard.index') }}" class="block my-5 text-3xl text-gray-50 dark:text-gray-900 toggle-theme">
+            <div class="my-20 text-3xl text-gray-50 dark:text-gray-900 toggle-theme">
+                {{ $user->name ?? '' }}
+            </div>    
+        <a href="{{ route('dashboard.index') }}" class="block my-5 text-3xl text-gray-50 dark:text-gray-900 toggle-theme">
                 Dashboard
             </a>
             <a href="{{ route('config.index') }}" class="block my-5 text-3xl text-gray-50 dark:text-gray-900 toggle-theme">
                 Configurações
             </a>
-            <a href="{{ route('logout') }}" class="block my-10 text-xl text-gray-50 dark:text-gray-900 toggle-theme">
-                Logout
+            <a href="{{ route('logout') }}" class="block my-20 text-xl text-gray-50 dark:text-gray-900 toggle-theme">
+                Sair
             </a>
         @else
             <a href="{{ route('home') }}" class="block my-5 text-3xl text-gray-50 dark:text-gray-900 toggle-theme">

@@ -18,10 +18,17 @@ Route::resource(
 
 Route::resource(
     'dashboard', UserGithubController::class
-);
+)->middleware(['auth']);
+
+Route::get('/pesquisar', 'UserGithubController@gitSearch')->name('gitSearch')->middleware(['auth']);
+Route::get('/detalhes', 'githubDetails@index')->name('githubDetails')->middleware(['auth']);
 
 Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::post('/login', 'Auth\LoginController@authenticate')->name('login.authenticate');
+
 Route::get('/cadastre-se', 'Auth\RegisterController@index')->name('register');
+Route::post('/cadastre-se', 'Auth\RegisterController@store')->name('register.store');
+
 Route::get('/logout', Auth\LogoutController::class)->name('logout');
 
 Route::get('/', function () {

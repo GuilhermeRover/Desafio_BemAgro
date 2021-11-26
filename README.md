@@ -15,6 +15,11 @@ Desafio elaborado pela empresa BemAgro para vaga de Desenvolvedor PHP.
 - Remover usuário da lista e do banco de dados;
 - Documentação do GitHub: https://docs.github.com/pt/free-pro-team@latest/rest .
 
+## Prazos e datas do desafio:
+- Envio do Desafio pela BemAgro: 22/11/2021 às 5:48 PM;
+- Prazo final para entrega: 26/11/2021 às 09:00 AM;
+- Início em: 22/11/2021 às 10:30 PM;
+- Entrega em:
 ## Setup instalado:
 
 - **[Laravel 7.x](https://laravel.com/)**;

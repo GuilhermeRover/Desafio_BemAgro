@@ -16,11 +16,11 @@
             }
         </script>
 
-        <title>{{ str_replace('_', ' ', config('app.name')) }}</title>
+        <title>{{ str_replace('_', ' ', env('app.name')) }}</title>
     </head>
     <body class="bg-white dark:bg-gray-900 toggle-theme">
         
-        <div x-data="{dark: localStorage.theme === 'dark', Menu: false, Lang: false, aboutBtn: false}">
+        <div x-data="{dark: localStorage.theme === 'dark', Menu: false, githubDetails: false}">
             @yield('body')
         </div>
 

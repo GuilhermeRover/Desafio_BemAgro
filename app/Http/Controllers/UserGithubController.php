@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\UserGithub;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserGithubController extends Controller
 {
@@ -12,10 +19,15 @@ class UserGithubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
         //
-        return view('app.config.user-config');
+        $user = Auth::user();
+        $usersGithub = DB::table('user_github')->get();
+        //dd($usersGithub);
+        return view('app.dashboard', ['user' => $user, 'usersGithub' => $usersGithub]);
     }
 
     /**
@@ -37,6 +49,27 @@ class UserGithubController extends Controller
     public function store(Request $request)
     {
         //
+        $token = Auth::user()->token;
+        $username = $request->username;
+
+        $gitSearch = Http::withToken($token)->get('https://api.github.com/users/'.$username);
+        
+        if (!$gitSearch->failed()) {
+            $store = UserGithub::create([
+                'avatar_url' => $gitSearch->json()['avatar_url'],
+                'login' => $gitSearch->json()['login'],
+                'name' => $gitSearch->json()['name'],
+                'email' => $gitSearch->json()['email'],
+                'company' => $gitSearch->json()['company'],
+                'location' => $gitSearch->json()['location'],
+                'html_url' => $gitSearch->json()['html_url'],
+            ]);
+            
+            if ($store) {
+                return redirect()->route('dashboard.index');
+            }
+        }
+        return redirect()->back();
     }
 
     /**
@@ -45,9 +78,10 @@ class UserGithubController extends Controller
      * @param  \App\UserGithub  $userGithub
      * @return \Illuminate\Http\Response
      */
-    public function show(UserGithub $userGithub)
+    public function show(Request $request)
     {
         //
+        
     }
 
     /**
@@ -79,8 +113,31 @@ class UserGithubController extends Controller
      * @param  \App\UserGithub  $userGithub
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserGithub $userGithub)
+    public function destroy($id)
     {
         //
+        $userGithub = UserGithub::find($id);
+        $userGithub->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted the shark!');
+        return redirect()->route('dashboard.index');
     }
+
+    public function gitSearch(Request $request)
+    {
+        //
+        //dd($request->search);
+        $token = Auth::user()->token;
+        $username = $request->search;
+        
+        $user = Auth::user();
+
+        $gitSearch = Http::withToken($token)->get('https://api.github.com/users/'.$username);
+        if (!$gitSearch->failed()) {
+            return view('app.github-search', ['user' => $user, 'gitSearch' => $gitSearch]);
+        }
+        return redirect()->back();
+    }
+
 }

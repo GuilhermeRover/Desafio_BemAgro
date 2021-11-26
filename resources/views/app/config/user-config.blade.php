@@ -2,11 +2,11 @@
 @section('body')
     
     <div class="">
-        @include('app.header.header', ['page' => 'Login'])
+        @include('app.header.header', ['page' => 'Configurações'])
     </div>
 
     <div class="w-screen">
-        Configurações
+        Configurações de usuário
     </div>
 
 @endsection

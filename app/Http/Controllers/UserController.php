@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('app.dashboard');
+        $user = Auth::user();
+        return view('app.config.user-config')->with('user', $user);
     }
 
     /**
@@ -26,6 +30,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('app.create-user');
     }
 
     /**
@@ -36,7 +41,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+        $store = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        
+        if ($store) {
+            return redirect()->route('config.index');
+            # code...
+        }
+        return redirect()->route('register');
+
     }
 
     /**

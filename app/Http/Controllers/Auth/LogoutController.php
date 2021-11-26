@@ -17,7 +17,7 @@ class LogoutController extends Controller
     public function __invoke(Request $request)
     {
         //
-        if (Auth()->check()) {
+        if (Auth()->check() == true) {
             if (Auth::logout()) {
                 return redirect()->route('login');
             }

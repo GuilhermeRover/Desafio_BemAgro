@@ -9,7 +9,7 @@
         <div class="w-5/6 lg:w-5/12">
             <div class="flex items-center justify-center">
                 <div class="w-full">
-                    <form class="border p-10 rounded border-gray-300 dark:border-gray-700 toggle-theme">
+                    <form  action="{{ route('login.authenticate') }}" method="post" class="border p-10 rounded border-gray-300 dark:border-gray-700 toggle-theme">
                         @csrf
                         <div class="text-3xl text-center text-gray-900 dark:text-gray-50 toggle-theme">
                             Login
